@@ -1,0 +1,70 @@
+{
+  "name": "Block",
+  "namespace": "io.emeraldpay.dshackle.archive.avro",
+  "type": "record",
+  "fields": [
+    {
+      "name": "blockchainType",
+      "type": {
+        "name": "BlockchainType",
+        "type": "enum",
+        "symbols": [
+          "ETHEREUM",
+          "BITCOIN"
+        ]
+      }
+    },
+    {
+      "name": "blockchainId",
+      "type": "string"
+    },
+    {
+      "name": "archiveTimestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "height",
+      "type": "long"
+    },
+    {
+      "name": "blockId",
+      "type": "string"
+    },
+    {
+      "name": "parentId",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "json",
+      "type": "bytes"
+    },
+    {
+      "name": "unclesCount",
+      "type": "int"
+    },
+    {
+      "name": "uncle0Json",
+      "type": [
+        "null",
+        "bytes"
+      ]
+    },
+    {
+      "name": "uncle1Json",
+      "type": [
+        "null",
+        "bytes"
+      ]
+    }
+  ]
+}

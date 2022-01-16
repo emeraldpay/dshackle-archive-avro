@@ -1,0 +1,91 @@
+= Dshackle Archive Avro definitions
+:lib-version: 0.1
+
+Avro schema definitions for Dshackle Archive files.
+
+== Fields Description
+
+=== Block
+
+.Fields common between different blockchains
+- `blockchainType` - _type of blockchain_, as a definitions of what fields to expect.
+One of `ETHEREUM` or `BITCOIN`
+- `blockchainId` - actual blockchain id (`ETH`, `BTC`, etc)
+- `archiveTimestamp` - when the archive record was created.
+Milliseconds since epoch
+- `height` - block height
+- `blockId` - block hash
+- `timestamp` - block timestamp.
+Milliseconds since epoch
+- `parentId` - parent block hash
+- `json` - JSON response for that block
+
+.Ethereum specific fields
+- `unclesCount` - number of uncles for the current block
+- `uncle0Json` - JSON for first uncle (`eth_getUncleByBlockHashAndIndex(0)`)
+- `uncle1Json` - JSON for second uncle (`eth_getUncleByBlockHashAndIndex(1)`)
+
+.Bitcoin specific fields
+- none
+
+=== Transaction
+
+.Fields common between different blockchains
+- `blockchainType` - _type of blockchain_, as a definitions of what fields to expect.
+One of `ETHEREUM` or `BITCOIN`
+- `blockchainId` - actual blockchain id (`ETH`, `BTC`, etc)
+- `archiveTimestamp` - when the archive record was created.
+Milliseconds since epoch
+- `height` - block height
+- `blockId` - block hash
+- `timestamp` - block timestamp.
+Milliseconds since epoch
+- `index` - index of the transaction in block
+- `txid` - hash or transaction id of the transaction
+- `json` - JSON response for that transaction
+- `raw` - raw bytes of the transaction
+
+.Ethereum specific fields
+- `from` - from address
+- `to` - to address
+- `receiptJson` - JSON response for `eth_getTransactionReceipt`
+- `traceJson` - JSON response for `trace_replayTransaction(trace)`
+- `stateDiffJson` - JSON response for `trace_replayTransaction(stateDiff)`
+
+.Bitcoin specific fields
+- none
+
+See `src/main/avro` for actual Avro definitions.
+
+== Java Stubs
+
+To use Java generated stubs use:
+
+[source,groovy,subs="attributes"]
+----
+repositories {
+    maven { url  "https://maven.emrld.io" }
+}
+
+dependencies {
+    implementation 'io.emeraldpay.dshackle.archive:dshackle-archive-avro:{lib-version}'
+}
+----
+
+Generated classes to access Avro messages:
+
+- `io.emeraldpay.dshackle.archive.avro.Block`
+- `io.emeraldpay.dshackle.archive.avro.Transaction`
+
+== License
+
+Copyright 2022 EmeraldPay, Inc
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and limitations under the License.
+
